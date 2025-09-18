@@ -14,7 +14,237 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      call_transcripts: {
+        Row: {
+          call_id: string
+          confidence: number | null
+          id: string
+          message: string
+          speaker: string
+          timestamp: string
+        }
+        Insert: {
+          call_id: string
+          confidence?: number | null
+          id?: string
+          message: string
+          speaker: string
+          timestamp?: string
+        }
+        Update: {
+          call_id?: string
+          confidence?: number | null
+          id?: string
+          message?: string
+          speaker?: string
+          timestamp?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "call_transcripts_call_id_fkey"
+            columns: ["call_id"]
+            isOneToOne: false
+            referencedRelation: "calls"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      calls: {
+        Row: {
+          caller_phone: string
+          confidence_score: number | null
+          created_at: string
+          duration: number | null
+          escalated_to_human: boolean | null
+          id: string
+          intent: string | null
+          recording_url: string | null
+          status: string | null
+          tenant_id: string
+          transcript: string | null
+          twilio_call_sid: string | null
+          updated_at: string
+        }
+        Insert: {
+          caller_phone: string
+          confidence_score?: number | null
+          created_at?: string
+          duration?: number | null
+          escalated_to_human?: boolean | null
+          id?: string
+          intent?: string | null
+          recording_url?: string | null
+          status?: string | null
+          tenant_id: string
+          transcript?: string | null
+          twilio_call_sid?: string | null
+          updated_at?: string
+        }
+        Update: {
+          caller_phone?: string
+          confidence_score?: number | null
+          created_at?: string
+          duration?: number | null
+          escalated_to_human?: boolean | null
+          id?: string
+          intent?: string | null
+          recording_url?: string | null
+          status?: string | null
+          tenant_id?: string
+          transcript?: string | null
+          twilio_call_sid?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calls_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leads: {
+        Row: {
+          call_id: string | null
+          created_at: string
+          email: string | null
+          id: string
+          intent: string | null
+          name: string | null
+          notes: string | null
+          phone: string | null
+          score: number | null
+          status: string | null
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          call_id?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          intent?: string | null
+          name?: string | null
+          notes?: string | null
+          phone?: string | null
+          score?: number | null
+          status?: string | null
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          call_id?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          intent?: string | null
+          name?: string | null
+          notes?: string | null
+          phone?: string | null
+          score?: number | null
+          status?: string | null
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_call_id_fkey"
+            columns: ["call_id"]
+            isOneToOne: false
+            referencedRelation: "calls"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leads_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string | null
+          id: string
+          last_name: string | null
+          role: string | null
+          tenant_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          role?: string | null
+          tenant_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          role?: string | null
+          tenant_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tenants: {
+        Row: {
+          business_type: string
+          created_at: string
+          greeting_prompt: string
+          id: string
+          name: string
+          phone_number: string
+          timezone: string | null
+          updated_at: string
+          working_hours: Json | null
+        }
+        Insert: {
+          business_type: string
+          created_at?: string
+          greeting_prompt?: string
+          id?: string
+          name: string
+          phone_number: string
+          timezone?: string | null
+          updated_at?: string
+          working_hours?: Json | null
+        }
+        Update: {
+          business_type?: string
+          created_at?: string
+          greeting_prompt?: string
+          id?: string
+          name?: string
+          phone_number?: string
+          timezone?: string | null
+          updated_at?: string
+          working_hours?: Json | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

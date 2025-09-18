@@ -130,10 +130,11 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Recent Calls */}
-        <RecentCalls />
-      </main>
-    </div>
+          {/* Recent Calls */}
+          <RecentCalls calls={recentCalls} />
+        </main>
+      </div>
+    </ProtectedRoute>
   );
 };
 
